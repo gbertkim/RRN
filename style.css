@@ -4,10 +4,85 @@
 
 #map {
     height: 100%;
+    width: auto;
 }
 
 html, body {
     height: 100%;
     margin: 0;
     padding: 0;
+}
+#startPage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+main {
+    justify-content: center;
+    display: flex;
+    flex-direction: row;
+    height: 75%;
+    width: 100%;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#mapContainer{
+    height: 100%;
+    width: 100%;
+    margin: 15px;
+}
+
+
+#infoContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: auto;
+    height: 100%;
+    margin: 15px;
+    max-width: 400px;
+}
+
+#imageRight {
+    height: 70%;
+}
+
+#imageDescription{
+    /* min-height: 250px;
+    min-width: 300px; */
+    height: 100%;
+    width: 100%;
+    margin-top: 15px;
+    border: 1px solid black;
+}
+
+#markerLayer img[src='https://i.ibb.co/wpX8d1r/Webp-net-resizeimage-1.png']{
+    animation: pulse .5s infinite alternate;
+    -webkit-animation: pulse .5s infinite alternate;
+    transform-origin: center;
+    -webkit-transform-origin: center;
+}
+
+@keyframes pulse{
+	to { 
+		transform: scale(0.7);
+		-webkit-transform: scale(0.7);  
+	}
+}
+
+@-webkit-keyframes pulse{
+	to { 
+		transform: scale(0.7);
+		-webkit-transform: scale(0.7);  
+	}
+}
+
+.bounce {
+    animation: pulse .5s infinite alternate;
+    -webkit-animation: pulse .5s infinite alternate;
+    transform-origin: center;
+    -webkit-transform-origin: center;
 }

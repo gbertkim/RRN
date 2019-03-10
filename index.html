@@ -10,13 +10,23 @@
 </head>
 <body>
     <div id="startPage">
-        <h1 role="heading" id="tourName">Spring Tour 2019</h1>
-        <p role="description" id="tourDescription">Run River North</p>
+        <h1 role="heading" id="tourName">RRN Spring Tour 2019</h1>
+        <p role="description" id="tourDescription">Where is Run River North?</p>
         <div id="quizStart">
-            <button role="button" type="button" id="startButton">START</button>
+            <button id="drop">Drop Markers</button>
         </div>
     </div>
+    <main role="main">
+        <section id="mapContainer">
+            <div id="map"></div>
+        </section>
+        <section id="infoContainer">
+            <img id="imageRight" src="https://scontent.cdninstagram.com/vp/45dbfbdb469395c119228c55e2f8b9ca/5D1A5A09/t51.2885-15/sh0.08/e35/s640x640/53090685_176994606609779_4460558315012353647_n.jpg?_nc_ht=scontent.cdninstagram.com">
+            <div id="imageDescription"></div>
+        </section>
+    </main>
     <p role="paragraph" id="errorMessage"></p>
+    <script type='text/javascript' src='config.js'></script>
     <script src="script.js"></script>
 </body>
 </html>
