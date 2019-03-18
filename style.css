@@ -2,6 +2,7 @@
     box-sizing: border-box;
 }
 
+
 html, body {
     height: 100%;
     margin: 0;
@@ -164,7 +165,7 @@ main {
 
 
 .listBox {
-    width: 25%;
+    width: 60%;
     margin-left: auto;
     margin-right: auto;
 }
@@ -189,9 +190,9 @@ main {
     transition: border-width 150ms ease-in-out;
   }
   
-#arrow:hover, #arrow:focus {
+  #arrow:hover, #arrow:focus {
     border-color: aqua;
-}
+  }
 
 
 @media screen and (max-width: 400px){  
@@ -214,7 +215,7 @@ main {
         height: 75%;
     }
     main {
-        height: 75%;
+        height: 80%;
     }
     /* #infoContainer {
         position: absolute;
