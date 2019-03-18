@@ -73,7 +73,6 @@ function drop() {
     setTimeout(function(){
         futureLocations(green);
         addListeners();
-
         // gives all images the id of "markerLayer" that can be called on CSS
         let myoverlay = new google.maps.OverlayView();
         myoverlay.draw = function() {
@@ -82,8 +81,22 @@ function drop() {
         myoverlay.setMap(map);
 
         makePath();
-
     }, 1000);
+    setTimeout(function(){
+        for (let i = 0; i<markers.length; i++){
+            $('#markerLayer img').eq(i).parent().attr('title',`${i}`).attr('tabindex','0').addClass('groupMarkers');
+        }
+        $('.groupMarkers').on('keypress', function(e){
+            if(e.which==13) {
+                let thisTitle = Number($(this).attr('title'));
+                $(this).addClass('bounce').siblings().removeClass('bounce');
+                $(`#markerLayer img[src='https://i.ibb.co/wpX8d1r/Webp-net-resizeimage-1.png']`).css('animation','none');
+                imageId = thisTitle;
+                uploadPicture(imageId);
+                $('#infoContainer').slideDown();
+            }
+        });
+    }, 1500);
     console.log(locationInfo);
 }
 
@@ -98,6 +111,7 @@ function makePath(){
     });
     flightPath.setMap(map);
 }
+
 //Creates a way to target each marker
 function addListeners(){
     for (let i = 0; i<markers.length; i++){
@@ -150,9 +164,9 @@ function uploadPicture(num){
                 </ul>
             </div>
             <div class="arrowBox">
-                <a href="#full">
-                    <div id="arrow"></div>
-                </a>
+                <div id="clickArrow">
+                    <a href='#' id="arrow"></a>
+                </div>
             </div>
         `)
         arrowMaker();
@@ -167,9 +181,9 @@ function uploadPicture(num){
                 </ul>
             </div>
             <div class="arrowBox">
-                <a href="#full">
-                    <div id="arrow"></div>
-                </a>
+                <div id="clickArrow">
+                    <a href='#' id="arrow"></a>
+                </div>
             </div>
         `)
         arrowMaker();
@@ -177,7 +191,7 @@ function uploadPicture(num){
 }
 
 function arrowMaker(){
-    $('.arrowBox').on('click', function(event){
+    $('#arrow').on('click', function(event){
         event.preventDefault();
         console.log('Arrow Clicked');
         $('#infoContainer').slideUp();
