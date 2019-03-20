@@ -9,6 +9,7 @@ let markers = [];
 let imageId;
 let map;
 let flightPath;
+let filteredSTORE;
 
 // Icon URLS
 let flag = {
@@ -43,6 +44,16 @@ let STORE = [{
     link: 'https://www.ticketfly.com/purchase/event/1823442/tfly?utm_medium=%5BLjava.lang.String%3B%406d48ffee&skinName=tfly',
     image: 'https://cdn0.weddingwire.com/emp/fotos/1/6/6/7/8/9/1507555083412-union-stage-3.jpg'
 }];
+
+function compareDates(arr){
+    let today = new Date();
+    today.setHours(0,0,0,0);
+    filteredSTORE = STORE.filter(function(concert){
+        if (new Date(concert.date) > today){
+            return true;
+        };
+    });
+}
 
 function initMap() {
     // add map with center and zoom
@@ -143,9 +154,9 @@ function currentLocation(icon){
 
 // Create markers for future tour dates
 function futureLocations(icon){
-    for (let i =0; i < STORE.length; i++){
-        addMarker(STORE[i].location, icon);
-        locationInfo.push(STORE[i].location);
+    for (let i =0; i < filteredSTORE.length; i++){
+        addMarker(filteredSTORE[i].location, icon);
+        locationInfo.push(filteredSTORE[i].location);
     }
 }
 
@@ -153,14 +164,14 @@ function futureLocations(icon){
 function uploadPicture(num){
     if (num+1>imageFinal.length){
         let storeNum = num-imageFinal.length
-        $('#imageRight').attr('src',`${STORE[storeNum].image}`);
+        $('#imageRight').attr('src',`${filteredSTORE[storeNum].image}`);
         $('#imageDescription').html(`
             <div class="listBox">
                 <ul class="list">
-                    <li>Date: ${STORE[storeNum].date}</li>
-                    <li>Venue: ${STORE[storeNum].venue}</li>
-                    <li>Location: ${STORE[storeNum].city}</li>
-                    <li>Ticket: <a class="tixLink" href="${STORE[storeNum].link}">Link</a></li>
+                    <li>Date: ${filteredSTORE[storeNum].date}</li>
+                    <li>Venue: ${filteredSTORE[storeNum].venue}</li>
+                    <li>Location: ${filteredSTORE[storeNum].city}</li>
+                    <li>Ticket: <a class="tixLink" href="${filteredSTORE[storeNum].link}">Link</a></li>
                 </ul>
             </div>
             <div class="arrowBox">
@@ -277,6 +288,7 @@ function displayResults(responseJson){
 
 ///////////Form Load
 function loadForm(){
+    compareDates(STORE);
     appendKeys();
     $('#infoContainer').hide();
     instagramAPI();
