@@ -294,7 +294,7 @@ function appendKeys(){
     // </script>`
     // );
     $(`<script async defer src=https://maps.googleapis.com/maps/api/js?key=${secretKey}>
-    </script>`).insertBefore($('configScript'));
+    </script>`).insertBefore($('#configScript'));
 }
 
 ///////////Form Load
