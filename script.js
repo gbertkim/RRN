@@ -289,10 +289,6 @@ function displayResults(responseJson){
 
 // Appended on javascript side to hide key
 function appendKeys(){
-    // $('body').append(`
-    // <script async defer src=https://maps.googleapis.com/maps/api/js?key=${secretKey}>
-    // </script>`
-    // );
     $(`<script async defer src=https://maps.googleapis.com/maps/api/js?key=${secretKey}>
     </script>`).insertBefore($('#configScript'));
 }
