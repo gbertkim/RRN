@@ -1,6 +1,5 @@
 'use strict'
-//////////All things maps
-
+//////////Global Variables
 const authKey = config.AUTH_KEY;
 const secretKey = config.GOOGLE_API;
 let imageFinal = [];
@@ -22,6 +21,7 @@ let rrn = {
     url: 'https://i.ibb.co/wpX8d1r/Webp-net-resizeimage-1.png',
 }
 
+// Array for future concert days
 let STORE = [{
     date: 'May 3, 2019',
     venue: "High Watt",
@@ -45,6 +45,7 @@ let STORE = [{
     image: 'https://cdn0.weddingwire.com/emp/fotos/1/6/6/7/8/9/1507555083412-union-stage-3.jpg'
 }];
 
+// Function to remove concert dates if a certain date has passed using filter
 function compareDates(arr){
     let today = new Date();
     today.setHours(0,0,0,0);
@@ -70,7 +71,7 @@ function initMap() {
     `)
 }
 
-
+// All the functions that are to occur when "track" is clicked
 function drop() {
 // Clear any previous markers
     clearMarkers();
@@ -94,6 +95,8 @@ function drop() {
         makePath();
     }, 1000);
     setTimeout(function(){
+        // gives accessilibity to markers by adding a tab index and 'enter' listener
+        // google api does not create accessible markers
         for (let i = 0; i<markers.length; i++){
             $('#markerLayer img').eq(i).parent().attr('title',`${i}`).attr('tabindex','0').addClass('groupMarkers');
         }
@@ -123,7 +126,7 @@ function makePath(){
     flightPath.setMap(map);
 }
 
-//Creates a way to target each marker
+//Creates a listeners for each marker
 function addListeners(){
     for (let i = 0; i<markers.length; i++){
         markers[i].addListener('click', function(){
@@ -141,26 +144,26 @@ function addListeners(){
 // Create markers for past dates
 function pastLocations(icon){
     for (let i = 0; i < imageFinal.length-1; i++) {
-        addMarker(imageFinal[i].location, icon);
+        addMarker(imageFinal[i].location, icon, i);
         locationInfo.push(imageFinal[i].location);
     }
 }
 
-// Create markers for where they last were
+// Create marker for where they last were
 function currentLocation(icon){
-    addMarker(imageFinal[imageFinal.length-1].location, icon)
+    addMarker(imageFinal[imageFinal.length-1].location, icon, 100);
     locationInfo.push(imageFinal[imageFinal.length-1].location);
 }
 
 // Create markers for future tour dates
 function futureLocations(icon){
     for (let i =0; i < filteredSTORE.length; i++){
-        addMarker(filteredSTORE[i].location, icon);
+        addMarker(filteredSTORE[i].location, icon, i);
         locationInfo.push(filteredSTORE[i].location);
     }
 }
 
-
+// Function to upload pictures using jquery
 function uploadPicture(num){
     if (num+1>imageFinal.length){
         let storeNum = num-imageFinal.length
@@ -168,10 +171,10 @@ function uploadPicture(num){
         $('#imageDescription').html(`
             <div class="listBox">
                 <ul class="list">
-                    <li>Date: ${filteredSTORE[storeNum].date}</li>
-                    <li>Venue: ${filteredSTORE[storeNum].venue}</li>
-                    <li>Location: ${filteredSTORE[storeNum].city}</li>
-                    <li>Ticket: <a class="tixLink" href="${filteredSTORE[storeNum].link}">Link</a></li>
+                    <li class="listCat">Date:<p class="imageDetails">${filteredSTORE[storeNum].date}</p></li>
+                    <li class="listCat">Venue:<p class="imageDetails">${filteredSTORE[storeNum].venue}</p></li>
+                    <li class="listCat">Location:<p class="imageDetails">${filteredSTORE[storeNum].city}</p></li>
+                    <li class="listCat">Ticket:<p class="imageDetails"><a class="tixLink" href="${filteredSTORE[storeNum].link}" target="_blank">Link</a></p></li>
                 </ul>
             </div>
             <div class="arrowBox">
@@ -186,9 +189,9 @@ function uploadPicture(num){
         $('#imageDescription').html(`
             <div class="listBox">
                 <ul class="list">
-                    <li>Date: ${imageFinal[num].time}</li>
-                    <li>Location: ${imageFinal[num].city}</li>
-                    <li>Description: ${imageFinal[num].text}</li>
+                    <li class="listCat">Date:<p class="imageDetails"> ${imageFinal[num].time}</p></li>
+                    <li class="listCat">Location:<p class="imageDetails">${imageFinal[num].city}</p></li>
+                    <li class="listCat">Description: <p class="imageDetails">${imageFinal[num].text}</p></li>
                 </ul>
             </div>
             <div class="arrowBox">
@@ -210,13 +213,14 @@ function arrowMaker(){
 }
 
 // Template for making markers
-function addMarker(coords, icon){ 
+function addMarker(coords, icon, num){ 
     markers.push(new google.maps.Marker({
             position: coords,
             map: map,
             icon: icon,
             title: markers.length.toString(),
-            optimized: false
+            optimized: false,
+            zIndex: num
     }));
     console.log(markers.length.toString());
 }
@@ -231,6 +235,7 @@ function clearMarkers(){
     locationInfo = [];
 }
 
+// Function to clear flight paths
 function clearFlight(){
     flightPath.setMap(null);
 }
@@ -256,10 +261,10 @@ function instagramAPI(){
 function displayResults(responseJson){
     // Filter reponse from instagram to responses with the correct hashtag
     console.log(responseJson);
-        let filtered = responseJson.data.filter(function(image){
+    let filtered = responseJson.data.filter(function(image){
         return image.tags == 'faketour2019';
     });
-    console.log(filtered);
+
     // Sort responses by date
     filtered.sort(function(a,b){
         return a.caption.created_time - b.caption.created_time;
@@ -278,12 +283,16 @@ function displayResults(responseJson){
             }
         };
     }
-    var date = new Date(filtered[1].caption.created_time * 1000);
-    console.log(filtered[1].caption.created_time);
-    console.log(date);
-    console.log(imageFinal);
     // Call map making function
     initMap();
+}
+
+// Appended on javascript side to hide key
+function appendKeys(){
+    $('body').append(`
+    <script async defer src=https://maps.googleapis.com/maps/api/js?key=${secretKey}>
+    </script>`
+    );
 }
 
 ///////////Form Load
@@ -294,21 +303,15 @@ function loadForm(){
     instagramAPI();
     $('#dropMarkers').on('click', '#drop', function(){
         console.log("Searching Instagram API");
+        $('#track').fadeOut(1500);
         drop();    
     });
-}
-
- // Appended on javascript side to hide key
-function appendKeys(){
-    $('body').append(`
-    <script async defer src=https://maps.googleapis.com/maps/api/js?key=${secretKey}>
-    </script>`
-    );
+    $('#logo').on('click', function(){
+        clearMarkers();
+        clearFlight();
+        $('#infoContainer').slideUp();
+        $('#track').fadeIn(1000);
+    })
 }
 
 loadForm();
-
-// animation to drop pin in order
-// set last pin a different color
-// set a line that follows
-// change picture on hover
