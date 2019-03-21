@@ -35,7 +35,7 @@ let STORE = [{
     city: "Charlotte, NC",
     location: {lat: 35.2474, lng: -80.804},
     link: 'https://www.ticketfly.com/purchase/event/1825144/tfly?utm_medium=%5BLjava.lang.String%3B%4057891044&skinName=tfly',
-    image: 'http://photos.cinematreasures.org/production/photos/167026/1462716639/large.jpg?1462716639'
+    image: 'https://photos.cinematreasures.org/production/photos/167026/1462716639/large.jpg?1462716639'
     },{
     date: 'May 7, 2019',
     venue: "Union Stage",
@@ -289,16 +289,18 @@ function displayResults(responseJson){
 
 // Appended on javascript side to hide key
 function appendKeys(){
-    $('body').append(`
-    <script async defer src=https://maps.googleapis.com/maps/api/js?key=${secretKey}>
-    </script>`
-    );
+    // $('body').append(`
+    // <script async defer src=https://maps.googleapis.com/maps/api/js?key=${secretKey}>
+    // </script>`
+    // );
+    $(`<script async defer src=https://maps.googleapis.com/maps/api/js?key=${secretKey}>
+    </script>`).insertBefore($('configScript'));
 }
 
 ///////////Form Load
 function loadForm(){
-    compareDates(STORE);
     appendKeys();
+    compareDates(STORE);
     $('#infoContainer').hide();
     instagramAPI();
     $('#dropMarkers').on('click', '#drop', function(){
