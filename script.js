@@ -30,14 +30,14 @@ let STORE = [{
     link: 'https://www.eventbrite.com/e/run-river-north-tickets-55663808951?aff=aff0bandsintown&appId=wf_ubzr.ehaevireabegu.pbz&comeFrom=242&artist_event_id=100802634',
     image: 'https://media-cdn.tripadvisor.com/media/photo-s/0f/c8/b4/e9/the-high-watt-has-a-225.jpg'
     },{
-    date: 'May 4, 2019',
+    date: 'January 4, 2020',
     venue: "Neighborhood Theatre",
     city: "Charlotte, NC",
     location: {lat: 35.2474, lng: -80.804},
     link: 'https://www.ticketfly.com/purchase/event/1825144/tfly?utm_medium=%5BLjava.lang.String%3B%4057891044&skinName=tfly',
     image: 'https://photos.cinematreasures.org/production/photos/167026/1462716639/large.jpg?1462716639'
     },{
-    date: 'May 7, 2019',
+    date: 'May 7, 2020',
     venue: "Union Stage",
     city: 'Washington, DC',
     location: {lat: 38.8787,lng: -77.0241},
