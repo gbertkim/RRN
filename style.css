@@ -1,30 +1,66 @@
 * {
     box-sizing: border-box;
 }
-
 html, body {
     height: 100%;
     margin: 0;
     padding: 0;
     font-family: roboto;
+    background-image: linear-gradient(rgb(255, 236, 239), rgb(255, 255, 255));
 }
 #startPage {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex-direction: row;
     height: 20%;
     color: black;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 850px;
+    margin-left: auto;
+    margin-right: auto;
 }
-
+#logoTitle {
+    display: inline-flex;
+    align-items: center;
+}
+#bar {
+    display: inline-flex;
+    flex-direction: row;
+    list-style: none;
+    margin: 0 15px 0 0;
+    padding: 0;
+}
+.barLink {
+    text-decoration: none;
+    margin: 0 .7em 0 .7em;
+    color: black;
+}
+#bar li:hover, #bar li:focus {
+    text-decoration: underline;
+    cursor: pointer;
+}
+#logo {
+    border-radius: 50%;
+    height: 75px;
+    margin-left: 15px;
+    margin-right: 15px;
+}
 #tourName {
     margin: 15px 0 15px 0;
+    font-size: 25px;
+    font-weight: 500;
 }
-
 #tourDescription {
+    max-width: 500px;
+    padding: 10px;
     margin: 10px 0 10px 0;
     padding-left: 10px;
     padding-right: 10px;
-    color: grey;
+    color: white;
+    line-height: 1.4;
+    font-size: 1.1em;
+    font-weight: 500;
+    background: rgb(138, 138, 138, .7);
 }
 #drop {
     font-size: 15px;
@@ -34,53 +70,49 @@ html, body {
     border-radius: 3px;
     border: none;
     margin-top: 3px;
-  }
-  
-  #drop:hover, #drop:focus {
+}
+#drop:hover, #drop:focus {
     background-color: aqua;
     -webkit-transition: background-color 1000ms linear;
     -ms-transition: background-color 1000ms linear;
     transition: background-color 1000ms linear;
     cursor: pointer;
-  }
-
+}
 .tixLink {
     color: salmon;
+    margin-left: 8px;
 }
-
 .tixLink:hover, .tixLink:focus {
     color: aqua;
+    cursor: pointer;
 }
-
 main {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    height: 80%;
+    height: 80%; 
     width: 100%;
     margin-left: auto;
     margin-right: auto;
 }
-
 #mapContainer {
     height: auto;
     width: 100%;
     max-width: 900px;
     margin: 0px;
 }
-
 #map {
     height: 100%;
     width: auto;
 }
-
 #mapKeys {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     position: relative;
-    background-color: white;
+    background-color: rgb(255, 236, 239, .7);
+    border-radius: 5px;
     min-height: 100px;
     min-width: 100px;
     max-width: 200px;
@@ -88,13 +120,28 @@ main {
     bottom: 150px;
     margin: 0;
 }
-
 #mapIcons {
     list-style: none;
     margin: 0;
     padding: 0;
 }
-
+#track {    
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 80%;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(116, 116, 116, .9);
+    max-width: 900px;
+    overflow: hidden;
+    background-image: url("banner.jpg");
+    background-size: cover;
+    background-position: center;
+}
 #infoContainer {
     position: absolute;
     bottom: 0;
@@ -108,67 +155,62 @@ main {
     max-width: 900px;
     overflow: hidden;
 }
-
 #imageRight {
-    max-height: 400px;
+    max-height: 350px;
     width: auto;
     margin-top: 25px;
 }
-
 #imageDescription{
-    /* min-height: 250px;
-    min-width: 300px; */
     height: 25%;
     width: 100%;
     margin-top: 15px;
+    color: white;
 }
-
+.imageDetails {
+    color: salmon;
+    margin-left: 8px;
+}
+.listCat {
+    display: flex;
+    align-items: center;
+    line-height: .1em;
+}
 #markerLayer img[src='https://i.ibb.co/wpX8d1r/Webp-net-resizeimage-1.png']{
     animation: pulse .5s infinite alternate;
     -webkit-animation: pulse .5s infinite alternate;
     transform-origin: center;
     -webkit-transform-origin: center;
 }
-
 @keyframes pulse{
 	to { 
 		transform: scale(0.7);
 		-webkit-transform: scale(0.7);  
 	}
 }
-
 @-webkit-keyframes pulse{
 	to { 
 		transform: scale(0.7);
 		-webkit-transform: scale(0.7);  
 	}
 }
-
 .bounce {
     animation: pulse .5s infinite alternate;
     -webkit-animation: pulse .5s infinite alternate;
     transform-origin: center;
     -webkit-transform-origin: center;
 }
-
 .list {
     color: white;
     list-style: none;
     padding: 0;
     font-size: 17px;
     line-height: 1.4em;
-    /* width: 60%;
-    margin-left: auto;
-    margin-right: auto; */
 }
-
-
 .listBox {
-    width: 25%;
+    width: 50%;
     margin-left: auto;
     margin-right: auto;
 }
-
 .arrowBox {
     width: 100%;
 }
@@ -187,45 +229,27 @@ main {
     border-width: 0px 3px 3px 0px;
     transform: rotate(45deg);
     transition: border-width 150ms ease-in-out;
-  }
-  
+}  
 #arrow:hover, #arrow:focus {
+    cursor: pointer;
     border-color: aqua;
 }
-
-
-@media screen and (max-width: 400px){  
+@media screen and (max-width: 500px){  
     #imageRight {
         max-height: 300px;
+    }
+    #startPage {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
     }
 }
 @media screen and (max-width: 800px){  
     .listBox {
-        width: 70%;
+        width: 80%;
     }
     #arrow {
         height: 4vw;
         width: 4vw;
     }
-    #startPage {
-        height: 25%;
-    }
-    #infoContainer{
-        height: 75%;
-    }
-    main {
-        height: 75%;
-    }
-    /* #infoContainer {
-        position: absolute;
-        bottom:0;
-        width: 100%;
-        height: 75%;
-        padding: 15px;
-    } */
-    /* #imageRight {
-        max-height: 300px;
-        width: auto;
-        margin-top: 25px;
-    } */
 }

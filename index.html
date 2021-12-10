@@ -11,11 +11,14 @@
 </head>
 <body>
     <div id="startPage">
-        <h1 role="heading" id="tourName">RRN SPRING TOUR 2019</h1>
-        <p role="description" id="tourDescription">Where is Run River North? Track the band on tour using their Instagram geolocation.</p>
-        <div id="dropMarkers">
-            <button role="button" id="drop">Track</button>
+        <div id="logoTitle">
+            <a href='#'><img id='logo' src='logo.jpg' alt="Run River North Logo"></a>
+            <h1 role="heading" id="tourName">RRN SPRING TOUR 2019</h1>
         </div>
+        <ul id="bar">
+            <li><a class="barLink" href="https://www.instagram.com/rrn_tour/" target="_blank">Instagram</a></li>
+            <li><a class="barLink" href="http://home.runrivernorth.com/" target="_blank">Website</a></li>
+        </ul>
     </div>
     <main role="main">
         <section id="mapContainer">
@@ -23,14 +26,20 @@
             <div id="mapKeys"></div>
         </section>
         <section id="infoContainer">
-            <img id="imageRight" src="https://scontent.cdninstagram.com/vp/4e04f2d0af4112fb17c1fbf5ca3f1b48/5D1DF9F0/t51.2885-15/sh0.08/e35/s640x640/53875481_403061626925537_2098018982342631048_n.jpg?_nc_ht=scontent.cdninstagram.com" alt="Band Photo">
+            <img id="imageRight" src="" alt="Instagram Photo">
             <div id="imageDescription">
                 <p role="paragraph">Follow Run River North on their Spring Tour 2019. Using their instagram's geolocation, you can follow their journey on google maps. Click on the green arrows for future concert information and tickets.</p>
             </div>
         </section>
+        <section id="track">
+            <p role="description" id="tourDescription">Follow Run River North on their new Spring Tour 2019. Using their instagram's geolocation, follow their journey on google maps. Click on markers to load images of past events or future concerts.</p>
+            <div id="dropMarkers">
+                <button role="button" id="drop">Track</button>
+            </div>
+        </section>
     </main>
     <p role="paragraph" id="errorMessage"></p>
-    <script type='text/javascript' src='config.js'></script>
+    <script id='configScript' type='text/javascript' src='config.js'></script>
     <script src="script.js"></script>
 </body>
 </html>
